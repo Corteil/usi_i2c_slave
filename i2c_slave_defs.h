@@ -24,24 +24,30 @@
 #define I2C_SDA 0
 #define I2C_SCL 2
 
-#define N_LEDS 16
-#define I2C_N_GLB_REG 4
+/* Increase N_LEDS to support 8x8 matrix; I2C_N_GLB_REG expanded for new regs */
+#define N_LEDS 64
+#define I2C_N_GLB_REG 12
 #define I2C_N_REG (I2C_N_GLB_REG + (N_LEDS * 3))
 #define I2C_SLAVE_ADDR 0x40
 
-/*
- * The library supports a write mask for each individual register (bits set are
- * writable) in the i2c_w_mask array. If you don't care about masks for each
- * individual register, you can define a global value to be used for all
- * registers here, saving flash and RAM
- */
 #define I2C_GLOBAL_WRITE_MASK 0xFF
 
-#define REG_CTRL    i2c_reg[0]
-#define     CTRL_RST    (1 << 0)
-#define     CTRL_GLB    (1 << 1)
-#define REG_GLB_G   i2c_reg[1]
-#define REG_GLB_R   i2c_reg[2]
-#define REG_GLB_B   i2c_reg[3]
+/* Register map */
+#define REG_CTRL      i2c_reg[0]
+#define     CTRL_RST      (1 << 0)
+#define     CTRL_GLB      (1 << 1)
+#define     CTRL_PAT_EN   (1 << 2)
+#define REG_GLB_G     i2c_reg[1]
+#define REG_GLB_R     i2c_reg[2]
+#define REG_GLB_B     i2c_reg[3]
+#define REG_PATTERN   i2c_reg[4]
+#define REG_SPEED     i2c_reg[5]
+#define REG_N_LEDS    i2c_reg[6]
+#define REG_SEC_G     i2c_reg[7]
+#define REG_SEC_R     i2c_reg[8]
+#define REG_SEC_B     i2c_reg[9]
+#define REG_PARAM1    i2c_reg[10]
+#define REG_PAL_SEL   i2c_reg[11]
+/* 0x0C+ : LED array, 3 bytes per LED (G, R, B) */
 
 #endif /* __I2C_SLAVE_DEFS__ */
