@@ -1,0 +1,7 @@
+# Compiler output
+*.o
+*.d
+*.lst
+*.hex
+*.elf
+*.map
